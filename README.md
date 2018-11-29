@@ -7,8 +7,9 @@ Bidirectional typesetting with LuaLaTeX
 
 
 ## Maintenance
-Vafa Khalighi, who was maintaining luabidi, handed maintenance to this bidi-tex
-GitHub Group (which initially consists of members of the LaTeX3 team).
+Vafa Khalighi, who was maintaining luabidi with Arthur Reutenauer, handed maintenance of all
+his packages to this bidi-tex GitHub Group
+(which initially consisted of members of the LaTeX3 team).
 
 Issues may be entered here.
 
