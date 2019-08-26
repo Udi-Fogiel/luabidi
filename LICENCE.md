@@ -1,5 +1,5 @@
-# LPPL Licence
+# MIT Licence
 
-Copyright (c) Vafa Khalighi 2009, and Arthur Reutenauer 2013
+Copyright (c) Vafa Khalighi 2009, Arthur Reutenauer 2013, 2019, Jürgen Spitzmüller 2019.
 
-https://www.latex-project.org/lppl/lppl-1-3c/
+https://opensource.org/licenses/MIT
