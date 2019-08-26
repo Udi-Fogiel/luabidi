@@ -1,12 +1,8 @@
 # luabidi
-Bidirectional typesetting with LuaLaTeX
+Luabidi is an attempt to offer the same functionality for LuaTeX as bidi
+does for XeTeX.
 
 ## CTAN Package
- https://www.ctan.org/pkg/luabidi
+https://www.ctan.org/pkg/luabidi
 
-
-
-## Maintenance
-Vafa Khalighi, who was maintaining luabidi with Arthur Reutenauer, handed maintenance of all
-his packages to this bidi-tex GitHub Group
-(which initially consisted of members of the LaTeX3 team).
+Copyright (c) Vafa Khalighi 2009, Arthur Reutenauer 2013, 2019, Jürgen Spitzmüller 2019
