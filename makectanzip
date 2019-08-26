@@ -1,0 +1,23 @@
+#!/bin/sh
+
+makezip()
+{
+  NAME=luabidi
+  TMPDIR=`mktemp -d /tmp/luabidiXXXXXX`
+  mkdir "$TMPDIR"/"$NAME"
+  filename="$TMPDIR"/"$NAME".zip
+
+  echo "\$0: $0"
+  SRCDIR=`realpath \`dirname $0\``
+  echo "source $SRCDIR"
+  cp -a tex doc "$TMPDIR"/"$NAME"
+  cd "$TMPDIR"
+  zip -ry $NAME.zip $NAME
+}
+
+
+if makezip; then
+  echo "$filename ready to be shipped to CTAN."
+else
+  echo "Something went wrong."
+fi
