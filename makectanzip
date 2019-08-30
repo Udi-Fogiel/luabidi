@@ -12,8 +12,8 @@ makezip()
   SRCDIR=`realpath \`dirname $0\``
   echo "source $SRCDIR"
   cp -a README.md LICENCE.md "$TMPDIR"/"$NAME"
-  cp -a tex/* "$TMPDIR"/"$NAME"/tex/"$TDSSUB"
-  cp -a doc/* "$TMPDIR"/"$NAME"/doc/"$TDSSUB"
+  cp -a tex/luabidi.sty "$TMPDIR"/"$NAME"/tex/"$TDSSUB"
+  cp -a doc/test.tex "$TMPDIR"/"$NAME"/doc/"$TDSSUB"
   cd "$TMPDIR"
   zip -ry $NAME.zip $NAME
 }
