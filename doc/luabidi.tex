@@ -1,0 +1,134 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{url}
+\usepackage{metalogo}
+
+\newcommand*\lbd{\textsf{luabidi}}
+\newcommand*\Lbd{\textsf{Luabidi}}
+\newcommand*{\cmd}[1]{\texttt{\textbackslash #1}}
+
+\def\fileversion{0.4}
+\def\filedate{2019/08/24}
+
+\usepackage[osf]{libertine}
+\usepackage[scaled=.8]{beramono}
+
+\begin{document}
+	
+\title{\lbd\\bidirectional typesetting in \LuaTeX}
+
+\date{v.\,\fileversion, \filedate}
+
+\author{Vafa Khalighi \and Arthur Reutenauer\thanks{%
+		Current maintainer. Please submit bug reports and feature requests to \protect\url{https://github.com/bidi-tex/luabidi/issues}.}
+	    \and Jürgen Spitzmüller}
+
+\maketitle
+
+\section{Objectives}
+\Lbd\ is an attempt to provide bidirectional writing support for the \LuaTeX\ engine in the same vein as the \textsf{bidi} package\footnote{%
+See \url{https://ctan.org/pkg/bidi}.} enables bidirectional writing with \XeTeX. The most prominent user of this package is \textsf{polyglossia}\footnote{%
+See \url{https://ctan.org/pkg/polyglossia}.} which uses \lbd\ with RTL languages and \LuaTeX\ output (as opposed to \textsf{bidi} with \XeTeX). Note, however, that \lbd\ is much more limited than \textsf{bidi}. Currently, only a very basic
+subset of the latter's features is supported.
+
+\section{Package Options}
+
+\begin{description}
+	\item[arabmaths] By default, \lbd\ generates left-to-right maths. If you would like to have right-to-leftmaths, use this option.
+	\item[textwidthfootnoterule] expands the footnote to the whole text width.
+% FIXME Does not seem to work yet.
+%	\item[autofootnoterule] sets the footnote rule right or left aligned, depending on the direction of the first footnote
+%	that follows the rule (i.\,e., that comes on the current page).
+\end{description}
+
+\section{User Commands}
+
+\subsection{Main Text Direction}
+
+By default, the main directionality of the document is left-to-right. To change it to right-to-left, use the switch
+
+\begin{quote}
+	\cmd{setRTLmain}
+\end{quote}
+
+\subsection{Paragraph Text Direction}
+
+To change directionality for paragraphs, you can use the following switches:
+\begin{description}
+	\item[\cmd{setRTL}] (alias: \cmd{setRL}, \cmd{unsetLTR}) Change paragraph directionality to right-to-left.
+	\item[\cmd{setLTR}] (alias: \cmd{setLR}, \cmd{unsetRTL}) Change paragraph directionality to left-to-right.
+\end{description}
+%
+Alternatively, you can also use the environments
+
+\begin{quote}
+	\begin{verbatim}
+	\begin{RTL}
+		...
+	\end{RTL}
+	\end{verbatim}
+\end{quote}
+%
+or
+
+\begin{quote}
+	\begin{verbatim}
+	\begin{LTR}
+	...
+	\end{LTR}
+	\end{verbatim}
+\end{quote}
+ 
+\subsection{Footnotes}
+
+\Lbd\ provides an additional footnote command, \cmd{Footnote}, in addition to the standard \cmd{footnote} command.
+The standard\cmd{footnote} command thereby places the footnote always on the side that is currently the origin of direction:
+on the left side of the page in LTR paragraphs and on the right in LTR paragraphs.
+
+The uppercased \cmd{Footnote} command, in contrast, always places the footnote on the left side, notwithstanding the current
+directionality. As opposed to \cmd{footnote}, \cmd{Footnote} does not have an optional argument to customize the number.
+
+Consequently,
+\begin{itemize}
+	\item you should use \cmd{Footnote} if you want to have footnotes placed at the left in any case
+	\item and \cmd{footnote} to get right-aligned footnotes in RTL context.
+	\item At the moment, there is no command provided to set right-aligned footnotes in LTR paragraphs.
+	This might be added in later releases.
+\end{itemize}
+%
+The placement of the footnote rule depends on the main text directionality:
+
+\begin{itemize}
+	\item In the default mode (i.\,e., if \cmd{setRTLmain} is not used), the footnote rule is always set left-aligned (as usual in LTR documents).
+	\item If the main direction is RTL (i.\,e., if \cmd{setRTLmain} is used), the footnote rule is always set right-aligned (as usual in LTR documents)
+\end{itemize}
+
+
+
+\section{Commands for Package Authors}
+
+The following tests are provided to be used in packages:
+
+\begin{description}
+	\item[\cmd{if@RTL}] determines whether the current paragraph direction is right-to-left.
+	\item[\cmd{if@RTLmain}] determines whether the main direction is right-to-left.
+\end{description}
+%
+The following macros are provided
+\begin{description}
+	\item[\cmd{@ensure@RTL\{...\}}] Ensure that the argument is typeset RTL.
+	\item[\cmd{@ensure@LTR\{...\}}] Ensure that the argument is typeset LTR.
+	\item[\cmd{@ensure@dir\{...\}}] (alias: \cmd{@ensure@maindir\{...\}}) If used in RTL mode, the argument is put inside \cmd{RLE}, if used in LTR mode, the argument is output as is.
+\end{description}
+
+\section{Revision Log}
+
+\begin{description}
+	\item[v. 0.4 (2019/08/24)] Fix \cmd{@ensure@RTL}.
+	\item[v. 0.3 (2019/07/10)] Fix compatibility with recent \LuaTeX\ (this version was never released to CTAN).
+	\item[v. 0.2 (2013/05/27)] Fix additional files.
+	\item[v. 0.1 (2009/04/01)] Initial release.
+\end{description}
+
+\end{document}
