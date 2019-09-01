@@ -9,6 +9,9 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{luabidi}[2019/08/24 v0.4
 	Bidirectional typesetting in LuaTeX]
+
+\RequirePackage{etoolbox}
+
 \newif\if@RTL
 \newif\if@RTLmain
 \@RTLmainfalse
@@ -28,7 +31,6 @@
 \def\@ensure@dir#1{\if@RTL\RLE{#1}\else{#1}\fi}
 \let\@ensure@maindir=\@ensuredir
 \DeclareOption{arabmaths}{\input{arabmaths}}
-\DeclareOption{textwidthfootnoterule}{\input{textwidthfootnoterule}}
 \let\n@xt=\
 \DeclareRobustCommand*\LRE{\protect\pLRE}
 \def\pLRE{\protect\afterassignment\moreLRE \let\n@xt= }
@@ -77,11 +79,47 @@
     \pardir TRT \textdir TRT\footnotetext{#2}%
   \endgroup
 }
-\DeclareOption{autofootnoterule}{\input{autofootnoterule}}
 
 % backwards compatibility
 \def\Footnote#1{\LTRfootnote{#1}}
 
+%
+% Footnote rules
+%
+
+% Respective package options
+\newif\ifluabidi@autofootnoterule
+\DeclareOption{autofootnoterule}{\luabidi@autofootnoteruletrue}
+\DeclareOption{textwidthfootnoterule}{\textwidthfootnoterule}
+
+% adjustable rule length
+\newlength\footnoterulewidth
+\setlength\footnoterulewidth{.4\columnwidth}
+
+% The left, right and full width rules
+\def\luabidi@left@fn{%
+  \hbox to \columnwidth
+  {\pagedir TLT\textdir TLT\vbox{\kern -3\p@
+   \hrule\@width\footnoterulewidth\kern2.6\p@}\hfil}}
+\def\luabidi@right@fn{%
+   \pagedir TRT\textdir TRT\hrule\@width\footnoterulewidth\kern2.6\p@}
+\def\luabidi@textwidth@fn{%
+   \kern-3\p@\hrule\@width\textwidth\kern2.6\p@}
+
+% switches for the rule position
+\def\leftfootnoterule{\global\def\footnoterule{\luabidi@left@fn}}
+\def\rightfootnoterule{\global\def\footnoterule{\luabidi@right@fn}}
+\def\textwidthfootnoterule{\global\def\footnoterule{\luabidi@textwidth@fn}}
+\def\autofootnoterule{\luabidi@autofootnoteruletrue}
+
+% This needs to be loaded late because of the switch
+\AtEndPreamble{%
+  \makeatletter
+     \ifluabidi@autofootnoterule
+         \input{autofootnoterule}
+     \fi
+  \makeatother
+}
 
 \ProcessOptions
 \endinput

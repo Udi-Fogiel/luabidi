@@ -117,7 +117,24 @@ By default, the placement of the footnote rule depends on the main text directio
 	\item If the main direction is RTL (i.\,e., if \cmd{setRTLmain} is used), the footnote rule is always set right-aligned (as usual in RTL documents)
 \end{itemize}
 %
+However, with the switch \cmd*{leftfootnoterule}, all subsequent footnote rules are always placed on the left.
+Likewise, \cmd*{rightfootnoterule} causes all subsequent footnote rules to be always placed on the right.
 
+The switch \cmd*{autofootnoterule} and the respective package option advise \lbd\ to automatically determine the rule position,
+depending on the directionality of the first footnote on the page. Note that this automatic can fail with footnotes at page boundaries
+that differ in directionality from the first footnote on the page. You can work around such cases by switching to \cmd{rightfootnoterule}
+or \cmd{leftfootnoterule} on these pages.
+
+If you want a footnote rule that spans the whole text width, you can use the switch \cmd*{textwidth\-footnoterule}
+or the respective package option.
+
+The\mgn{footnoterulewidth} length of left and right footnote rules can be adjusted via 
+
+\begin{quote}
+  \verb|\setlength\footenoterulewidth{<length>}|
+\end{quote}
+%
+The predefined width is \verb|0.4\columnwidth|.
 
 
 
@@ -140,7 +157,8 @@ The following macros are provided
 \section{Revision Log}
 
 \begin{description}
-	\item[v. 0.5 (???)] Add \cmd{RTLfootnote} and \cmd{LTRfootnote}; fix \texttt{autofootnoterule} option; add manual.
+	\item[v. 0.5 (???)] Add \cmd{RTLfootnote} and \cmd{LTRfootnote}; fix \texttt{autofootnoterule} option; add \cmd{autofootnoterule},
+	     \cmd{leftfootnoterule}, \cmd{rightfootnoterule} and \cmd{textwidthfootnoterule}; add manual.
 	\item[v. 0.4 (2019/08/24)] Fix \cmd{@ensure@RTL}.
 	\item[v. 0.3 (2019/07/10)] Fix compatibility with recent \LuaTeX\ (this version was never released to CTAN).
 	\item[v. 0.2 (2013/05/27)] Fix additional files.
