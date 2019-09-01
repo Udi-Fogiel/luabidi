@@ -6,7 +6,20 @@
 
 \newcommand*\lbd{\textsf{luabidi}}
 \newcommand*\Lbd{\textsf{Luabidi}}
-\newcommand*{\cmd}[1]{\texttt{\textbackslash #1}}
+
+% Some helpers to document commands and environments
+\makeatletter
+\newcommand*{\cmd}{\@ifstar{\cmdm}{\cmdi}}
+\makeatother
+% \cmd{csname}: \csname inline
+\newcommand*{\cmdi}[1]{\texttt{\textbackslash #1}}
+% \mgn{csname}: \csname in margin
+\newcommand*{\mgn}[1]{\marginpar{\footnotesize\texttt{\textbackslash #1}}}
+% \cmd*{csname}: \csname inline and in margin
+\newcommand*{\cmdm}[1]{\cmdi{#1}\mgn{#1}}
+% \mgne{env}: {env} in margin
+\newcommand*{\mgne}[1]{\marginpar{\footnotesize\{\texttt{#1}\}}}
+\reversemarginpar
 
 \def\fileversion{0.4}
 \def\filedate{2019/08/24}
@@ -16,7 +29,7 @@
 
 \begin{document}
 	
-\title{\lbd\\bidirectional typesetting in \LuaTeX}
+\title{\lbd\\Bidirectional typesetting in \LuaTeX}
 
 \date{v.\,\fileversion, \filedate}
 
@@ -49,18 +62,20 @@ subset of the latter's features is supported.
 By default, the main directionality of the document is left-to-right. To change it to right-to-left, use the switch
 
 \begin{quote}
-	\cmd{setRTLmain}
+	\cmd*{setRTLmain}
 \end{quote}
+%
+This is advisable if your document consists mainly of right-to-left text.
 
 \subsection{Paragraph Text Direction}
 
 To change directionality for paragraphs, you can use the following switches:
 \begin{description}
-	\item[\cmd{setRTL}] (alias: \cmd{setRL}, \cmd{unsetLTR}) Change paragraph directionality to right-to-left.
-	\item[\cmd{setLTR}] (alias: \cmd{setLR}, \cmd{unsetRTL}) Change paragraph directionality to left-to-right.
+	\item[\cmd{setRTL}]\mgn{setRTL} (alias: \cmd*{setRL}, \cmd*{unsetLTR}) Change paragraph directionality to right-to-left.
+	\item[\cmd{setLTR}]\mgn{setLTR} (alias: \cmd*{setLR}, \cmd*{unsetRTL}) Change paragraph directionality to left-to-right.
 \end{description}
 %
-Alternatively, you can also use the environments
+Alternatively, you can also use the environments\mgne{RTL}\mgne{LTR}
 
 \begin{quote}
 	\begin{verbatim}
@@ -82,19 +97,18 @@ or
  
 \subsection{Footnotes}
 
-\Lbd\ provides an additional footnote command, \cmd{Footnote}, in addition to the standard \cmd{footnote} command.
+\subsubsection{Horizontal Footnote Position}
+
+\Lbd\ provides two additional footnote commands in addition to standard \cmd*{footnote}:
+\cmd*{RTLfootnote} and \cmd*{LTRfootnote}.
 The standard \cmd{footnote} command thereby places the footnote always on the side that is currently the origin of direction:
-on the left side of the page in LTR paragraphs and on the right in LTR paragraphs.
+on the left side of the page in LTR paragraphs and on the right in RTL paragraphs.
 
-The uppercased \cmd{Footnote} command, in contrast, always places the footnote on the left side, notwithstanding the current
-directionality. As opposed to \cmd{footnote}, \cmd{Footnote} does not have an optional argument to customize the number.
+\cmd{LTRfootnote}, in contrast, always places the footnote on the left side, notwithstanding the current
+directionality. \cmd{RTLfootnote} always places it on the right side. Like \cmd{footnote}, \cmd{RTLfootnote}
+and \cmd{LTRfootnote} have an optional argument to customize the number.
 
-Consequently,
 \begin{itemize}
-	\item you should use \cmd{Footnote} if you want to have footnotes placed at the left in any case
-	\item and \cmd{footnote} to get right-aligned footnotes in RTL context.
-	\item At the moment, there is no command provided to set right-aligned footnotes in LTR paragraphs.
-	This might be added in later releases.
 \end{itemize}
 %
 The placement of the footnote rule depends on the main text directionality:
@@ -125,6 +139,7 @@ The following macros are provided
 \section{Revision Log}
 
 \begin{description}
+	\item[v. 0.5 (???)] Add \cmd{RTLfootnote} and \cmd{LTRfootnote}; add manual.
 	\item[v. 0.4 (2019/08/24)] Fix \cmd{@ensure@RTL}.
 	\item[v. 0.3 (2019/07/10)] Fix compatibility with recent \LuaTeX\ (this version was never released to CTAN).
 	\item[v. 0.2 (2013/05/27)] Fix additional files.

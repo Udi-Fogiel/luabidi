@@ -41,16 +41,46 @@
 \let\LR=\LRE
 \let\RL=\RLE
 
-\def\Footnote#1{%
-\begingroup
-\footnotemark
-\renewcommand{\thefootnote}{\@arabic\c@footnote}%
-\pardir TLT \textdir TLT\footnotetext{#1}%
-\endgroup
+%
+% Footnotes
+%
+
+% These are defined in polyglossia. Provide simple fallbacks
+\providecommand*\localnumber[1]{%
+      \protect\@arabic\csuse{c@#1}%
+}
+\providecommand*\Localnumber[1]{#1}
+
+\let\footnotemarkLR\footnotemark
+\let\footnotemarkRL\footnotemark
+
+\providecommand\LTRfootnote[2][]{%
+  \begingroup
+    \ifx#1\\\\\footnotemarkLR
+        \renewcommand{\thefootnote}{\localnumber{footnote}}%
+    \else%
+        \footnotemarkLR[#1]%
+        \renewcommand{\thefootnote}{\Localnumber{#1}}%
+    \fi
+    \pardir TLT \textdir TLT\footnotetext{#2}%
+  \endgroup
 }
 
+\providecommand\RTLfootnote[2][]{%
+  \begingroup
+    \ifx#1\\\\\footnotemarkRL%
+       \renewcommand{\thefootnote}{\localnumber{footnote}}%
+    \else%
+       \footnotemarkRL[#1]%
+       \renewcommand{\thefootnote}{\Localnumber{#1}}%
+    \fi
+    \pardir TRT \textdir TRT\footnotetext{#2}%
+  \endgroup
+}
 \DeclareOption{autofootnoterule}{\input{autofootnoterule}}
 
+% backwards compatibility
+\def\Footnote#1{\LTRfootnote{#1}}
 
 
 \ProcessOptions
