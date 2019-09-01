@@ -49,10 +49,9 @@ subset of the latter's features is supported.
 
 \begin{description}
 	\item[arabmaths] By default, \lbd\ generates left-to-right maths. If you would like to have right-to-left maths, use this option.
-	\item[textwidthfootnoterule] expands the footnote to the whole text width.
-% FIXME Does not seem to work yet.
-%	\item[autofootnoterule] sets the footnote rule right or left aligned, depending on the direction of the first footnote
-%	that follows the rule (i.\,e., that comes on the current page).
+	\item[textwidthfootnoterule] expands the footnote rule to the whole text width.
+	\item[autofootnoterule] sets the footnote rule right or left aligned, depending on the direction of the first footnote
+	that follows the rule (i.\,e., that comes on the current page).
 \end{description}
 
 \section{User Commands}
@@ -108,15 +107,17 @@ on the left side of the page in LTR paragraphs and on the right in RTL paragraph
 directionality. \cmd{RTLfootnote} always places it on the right side. Like \cmd{footnote}, \cmd{RTLfootnote}
 and \cmd{LTRfootnote} have an optional argument to customize the number.
 
-\begin{itemize}
-\end{itemize}
-%
-The placement of the footnote rule depends on the main text directionality:
+
+\subsubsection{Footnote Rule Length and Position}
+
+By default, the placement of the footnote rule depends on the main text directionality:
 
 \begin{itemize}
-	\item In the default mode (i.\,e., if \cmd{setRTLmain} is not used), the footnote rule is always set left-aligned (as usual in LTR documents).
-	\item If the main direction is RTL (i.\,e., if \cmd{setRTLmain} is used), the footnote rule is always set right-aligned (as usual in LTR documents)
+	\item In default mode (i.\,e., if \cmd{setRTLmain} is not used), the footnote rule is always set left-aligned (as usual in LTR documents).
+	\item If the main direction is RTL (i.\,e., if \cmd{setRTLmain} is used), the footnote rule is always set right-aligned (as usual in RTL documents)
 \end{itemize}
+%
+
 
 
 
@@ -139,7 +140,7 @@ The following macros are provided
 \section{Revision Log}
 
 \begin{description}
-	\item[v. 0.5 (???)] Add \cmd{RTLfootnote} and \cmd{LTRfootnote}; add manual.
+	\item[v. 0.5 (???)] Add \cmd{RTLfootnote} and \cmd{LTRfootnote}; fix \texttt{autofootnoterule} option; add manual.
 	\item[v. 0.4 (2019/08/24)] Fix \cmd{@ensure@RTL}.
 	\item[v. 0.3 (2019/07/10)] Fix compatibility with recent \LuaTeX\ (this version was never released to CTAN).
 	\item[v. 0.2 (2013/05/27)] Fix additional files.
