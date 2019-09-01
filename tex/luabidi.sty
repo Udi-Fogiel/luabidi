@@ -30,7 +30,7 @@
 \def\@ensure@LTR#1{\if@RTL\LRE{#1}\else{#1}\fi}
 \def\@ensure@dir#1{\if@RTL\RLE{#1}\else{#1}\fi}
 \let\@ensure@maindir=\@ensuredir
-\DeclareOption{arabmaths}{\input{arabmaths}}
+\DeclareOption{arabmaths}{\input{luabidi-arabmaths.def}}
 \let\n@xt=\
 \DeclareRobustCommand*\LRE{\protect\pLRE}
 \def\pLRE{\protect\afterassignment\moreLRE \let\n@xt= }
@@ -116,7 +116,7 @@
 \AtEndPreamble{%
   \makeatletter
      \ifluabidi@autofootnoterule
-         \input{autofootnoterule}
+         \input{luabidi-autofootnoterule.def}
      \fi
   \makeatother
 }
