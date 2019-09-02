@@ -28,7 +28,7 @@
 \usepackage[scaled=.8]{beramono}
 
 \begin{document}
-	
+
 \title{\lbd\\Bidirectional typesetting in \LuaTeX}
 
 \date{v.\,\fileversion, \filedate}
@@ -93,7 +93,7 @@ or
 	\end{LTR}
 	\end{verbatim}
 \end{quote}
- 
+
 \subsection{Footnotes}
 
 \subsubsection{Horizontal Footnote Position}
@@ -128,7 +128,7 @@ or \cmd{leftfootnoterule} on these pages.
 If you want a footnote rule that spans the whole text width, you can use the switch \cmd*{textwidth\-footnoterule}
 or the respective package option.
 
-The\mgn{footnoterulewidth} length of left and right footnote rules can be adjusted via 
+The\mgn{footnoterulewidth} length of left and right footnote rules can be adjusted via
 
 \begin{quote}
   \verb|\setlength\footenoterulewidth{<length>}|
@@ -152,12 +152,13 @@ The following macros are provided
 	\item[\cmd{@ensure@RTL\{...\}}] Ensure that the argument is typeset RTL.
 	\item[\cmd{@ensure@LTR\{...\}}] Ensure that the argument is typeset LTR.
 	\item[\cmd{@ensure@dir\{...\}}] (alias: \cmd{@ensure@maindir\{...\}}) If used in RTL mode, the argument is put inside \cmd{RLE}, if used in LTR mode, the argument is output as is.
+        \item[\cmd{hboxR\{...\}}] Puts its argument in a RTL \cmd{hbox}.
 \end{description}
 
 \section{Revision Log}
 
 \begin{description}
-	\item[v. 0.5 (???)] Add \cmd{RTLfootnote} and \cmd{LTRfootnote}; fix \texttt{autofootnoterule} option; add \cmd{autofootnoterule},
+	\item[v. 0.5 (???)] Add \cmd{RTLfootnote}, \cmd{LTRfootnote}, and \cmd{hboxR}; fix \texttt{autofootnoterule} option; add \cmd{autofootnoterule},
 	     \cmd{leftfootnoterule}, \cmd{rightfootnoterule} and \cmd{textwidthfootnoterule}; add manual.
 	\item[v. 0.4 (2019/08/24)] Fix \cmd{@ensure@RTL}.
 	\item[v. 0.3 (2019/07/10)] Fix compatibility with recent \LuaTeX\ (this version was never released to CTAN).
