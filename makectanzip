@@ -17,6 +17,13 @@ makezip()
   cp -a README.md LICENCE.md "$TMPDIR"/"$NAME"
   cp -a tex/* "$TMPDIR"/"$NAME"/tex
   cp -a doc/* "$TMPDIR"/"$NAME"/doc
+
+  # Compile documentation
+  TEXINPUTS=$PWD/tex:$PWD/doc:
+  cd /tmp
+  lualatex luabidi
+  cp -i luabidi.pdf "$TMPDIR"/"$NAME"/doc/luabidi.pdf
+
   # Now prepare the TDS zip.
   cp -a tex/* "$TMPDIR"/"$NAME"/tds/tex/"$TDSSUB"
   cp -a README.md LICENCE.md doc/* "$TMPDIR"/"$NAME"/tds/doc/"$TDSSUB"
