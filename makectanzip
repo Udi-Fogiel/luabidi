@@ -20,7 +20,7 @@ makezip()
 
   # Compile documentation
   TEXINPUTS=$PWD/tex:$PWD/doc:
-  cd /tmp
+  cd "$TMPDIR"/"$NAME"/doc
   lualatex luabidi
   cp -i luabidi.pdf "$TMPDIR"/"$NAME"/doc/luabidi.pdf
 
