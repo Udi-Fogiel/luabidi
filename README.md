@@ -5,7 +5,8 @@ does for XeTeX.
 ## CTAN Package
 https://www.ctan.org/pkg/luabidi
 
-Copyright (c) Vafa Khalighi 2009, Arthur Reutenauer 2013, 2019, Jürgen Spitzmüller 2019
+Copyright (c) Vafa Khalighi 2009, Arthur Reutenauer 2013, 2019-2023,
+Jürgen Spitzmüller 2019-2023
 
 Except for luabidi.sty, all files in this package are licensed under the terms
 of the MIT licence in the wording of the Open Source Initiative
