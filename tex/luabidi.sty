@@ -7,7 +7,7 @@
 %% conditions of the LaTeX Project Public License, either version 1.3c
 %% of this license or (at your option) any later version.
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{luabidi}[2019/10/27 v0.5
+\ProvidesPackage{luabidi}[2023/10/01 v0.6
 	Bidirectional typesetting in LuaTeX]
 
 \RequirePackage{etoolbox}
@@ -58,7 +58,7 @@
 \def\hboxR#1{\hbox{\RL{#1}}}
 
 %
-% If \pagedir is different from \pardir then \shapemode needs to be 2 for \parshape
+% If \pagedir is different from \pardir then \shapemode needs to be 2 for \parshape in lists
 %
 
 \let\luabidi@OL@list\list
@@ -74,6 +74,13 @@
 %
 
 \output\expandafter{\expandafter\bodydir\expandafter\pagedir\the\output}
+
+%
+% The following registers are set to 1 to fix some bugs in the engine. See sections 3.3.3 and 7.5.3 of LuaTeX's manual.
+%
+
+\matheqdirmode=1
+\breakafterdirmode=1
 
 %
 % Footnotes
