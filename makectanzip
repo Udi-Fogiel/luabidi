@@ -22,9 +22,12 @@ makezip()
   TEXINPUTS=$PWD/tex:$PWD/doc:
   cd "$TMPDIR"/"$NAME"/doc
   lualatex luabidi
+  lualatex luabidi
+  rm *.{glo,log,out,idx,aux,toc,hd} 2&> /dev/null
   cp -i luabidi.pdf "$TMPDIR"/"$NAME"/doc/luabidi.pdf
 
   # Now prepare the TDS zip.
+  cd ..
   cp -a tex/* "$TMPDIR"/"$NAME"/tds/tex/"$TDSSUB"
   cp -a README.md LICENCE.md doc/* "$TMPDIR"/"$NAME"/tds/doc/"$TDSSUB"
   cd "$TMPDIR"/"$NAME"/tds
