@@ -27,14 +27,14 @@ makezip()
   cp -i luabidi.pdf "$TMPDIR"/"$NAME"/doc/luabidi.pdf
 
   # Now prepare the TDS zip.
-  cd ..
-  cp -a tex/* "$TMPDIR"/"$NAME"/tds/tex/"$TDSSUB"
-  cp -a README.md LICENCE.md doc/* "$TMPDIR"/"$NAME"/tds/doc/"$TDSSUB"
-  cd "$TMPDIR"/"$NAME"/tds
-  zip -ry $NAME.tds.zip *
-  cd ..
-  mv -f tds/$NAME.tds.zip .
-  rm -rf tds
+#  cd ..
+#  cp -a tex/* "$TMPDIR"/"$NAME"/tds/tex/"$TDSSUB"
+#  cp -a README.md LICENCE.md doc/* "$TMPDIR"/"$NAME"/tds/doc/"$TDSSUB"
+#  cd "$TMPDIR"/"$NAME"/tds
+#  zip -ry $NAME.tds.zip *
+#  cd ..
+#  mv -f tds/$NAME.tds.zip .
+#  rm -rf tds
   cd ..
   zip -ry $NAME.zip $NAME
 }
