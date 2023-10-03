@@ -19,10 +19,12 @@ makezip()
 
   # Compile documentation
   TEXINPUTS=$PWD/tex:$PWD/doc:
+  # Put sty in place to get correct version data
+  cp -a tex/luabidi.sty "$TMPDIR"/"$NAME"/doc
   cd "$TMPDIR"/"$NAME"/doc
   lualatex luabidi
   lualatex luabidi
-  rm *.{glo,log,out,idx,aux,toc,hd} 2&> /dev/null
+  rm *.{sty,glo,log,out,idx,aux,toc,hd} 2&> /dev/null
 
   # Now prepare the zip archive.
   ctanzip=$NAME.zip
