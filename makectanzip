@@ -2,13 +2,12 @@
 
 makezip()
 {
+  origdir=`pwd`
   NAME=luabidi
   TMPDIR=`mktemp -d /tmp/luabidiXXXXXX`
   TDSSUB=lualatex/luabidi/
   mkdir -p "$TMPDIR"/"$NAME"/tex
   mkdir -p "$TMPDIR"/"$NAME"/doc
-  mkdir -p "$TMPDIR"/"$NAME"/tds/tex/"$TDSSUB"
-  mkdir -p "$TMPDIR"/"$NAME"/tds/doc/"$TDSSUB"
   filename="$TMPDIR"/"$NAME".zip
 
   SRCDIR=`realpath \`dirname $0\``
@@ -24,24 +23,19 @@ makezip()
   lualatex luabidi
   lualatex luabidi
   rm *.{glo,log,out,idx,aux,toc,hd} 2&> /dev/null
-  cp -i luabidi.pdf "$TMPDIR"/"$NAME"/doc/luabidi.pdf
 
-  # Now prepare the TDS zip.
-#  cd ..
-#  cp -a tex/* "$TMPDIR"/"$NAME"/tds/tex/"$TDSSUB"
-#  cp -a README.md LICENCE.md doc/* "$TMPDIR"/"$NAME"/tds/doc/"$TDSSUB"
-#  cd "$TMPDIR"/"$NAME"/tds
-#  zip -ry $NAME.tds.zip *
-#  cd ..
-#  mv -f tds/$NAME.tds.zip .
-#  rm -rf tds
-  cd ..
-  zip -ry $NAME.zip $NAME
+  # Now prepare the zip archive.
+  ctanzip=$NAME.zip
+  cd ../..
+  zip -ry $ctanzip $NAME
 }
 
 
 if makezip; then
-  echo "$filename ready to be shipped to CTAN."
+  mv -f $ctanzip $origdir/
+  cd ..
+  rm -rf $TMPDIR
+  echo "$ctanzip ready to be shipped to CTAN."
 else
   echo "Something went wrong."
 fi
